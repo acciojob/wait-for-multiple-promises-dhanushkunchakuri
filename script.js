@@ -31,11 +31,7 @@ const promise3 = () => {
 let count = 1;
 let sum=0
 let doc = document.getElementById("output");
-doc.innerHTML = `
-	<tr>
-		<td colspan="2">Loading...</td>
-	</tr>
-`;
+
 
 Promise.all([promise1(),promise2(),promise3()]).then((data)=>{
 	doc.innerHTML = "";
