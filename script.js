@@ -29,16 +29,41 @@ const promise3 = () => {
 };
 
 let count = 1;
+let sum=0
 let doc = document.getElementById("output");
+doc.innerHTML = `
+	<tr>
+		<td colspan="2">Loading...</td>
+	</tr>
+`;
 
 Promise.all([promise1(),promise2(),promise3()]).then((data)=>{
-	data.forEach((value)=>{
-	doc.innerHTML+=`
+	doc.innerHTML = "";
+	let count = 1;
+	let maxTime = 0;
+
+	data.forEach((value) => {
+		const rounded = parseFloat(value.toFixed(3));
+		maxTime = Math.max(maxTime, rounded);
+		doc.innerHTML += `
+			<tr>
+				<td>Promise ${count++}</td>
+				<td>${rounded}</td>
+			</tr>
+		`;
+	});
+
+	doc.innerHTML += `
 		<tr>
-			<td>Promise ${count}</td>
-			<td>${Math.floor(value)}</td>
+			<td><b>Total</b></td>
+			<td><b>${maxTime.toFixed(3)}</b></td>
 		</tr>
-	`
-	count++;	
-	})
-})
+	`;
+});
+
+
+
+
+
+
+
